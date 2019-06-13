@@ -1,7 +1,7 @@
 django-rest-easy
 ================
 
-[![Build Status](https://travis-ci.org/Telmediq/django-rest-easy.svg)](https://travis-ci.org/Telmediq/django-rest-easy)
+[![Build Status](https://travis-ci.org/bujniewicz/django-rest-easy.svg)](https://travis-ci.org/bujniewicz/django-rest-easy)
 
 Django-rest-easy is an extension to Django Rest Framework providing quality of life improvements to serializers and views
 that introduce a more coherent workflow for creating REST APIs:
