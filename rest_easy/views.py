@@ -238,7 +238,7 @@ class GenericAPIViewBase(ScopedViewMixin, generics.GenericAPIView):
             schema = getattr(self, 'schema', 'default')
         return serializer_register.get_name(model, schema)
 
-    def get_serializer_class(self):
+    def get_serializer_class(self, verb=None):
         """
         Gets serializer appropriate for this view.
 
@@ -251,7 +251,7 @@ class GenericAPIViewBase(ScopedViewMixin, generics.GenericAPIView):
         if hasattr(self, 'serializer_class') and self.serializer_class:
             return self.serializer_class
 
-        serializer = serializer_register.lookup(self.get_serializer_name(verb=self.get_drf_verb()))
+        serializer = serializer_register.lookup(self.get_serializer_name(verb=verb or self.get_drf_verb()))
         if serializer:
             return serializer
 
