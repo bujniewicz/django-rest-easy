@@ -215,7 +215,7 @@ class GenericAPIViewBase(ScopedViewMixin, generics.GenericAPIView):
             'patch': 'partial_update',
             'delete': 'destroy'
         }
-        return mapping[method]
+        return mapping.get(method, method)
 
     def get_serializer_name(self, verb=None):
         """
