@@ -204,6 +204,8 @@ class GenericAPIViewBase(ScopedViewMixin, generics.GenericAPIView):
         """
         Obtain the DRF verb used for a request.
         """
+        if hasattr(self, 'action') and self.action:
+            return self.action
         method = self.request.method.lower()
         if method == 'get':
             if self.lookup_url_kwarg in self.kwargs:
