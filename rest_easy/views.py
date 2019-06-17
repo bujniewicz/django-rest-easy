@@ -396,7 +396,7 @@ ReadOnlyModelViewSet = type(
 
 CreateAndReadModelViewSet = type(
     'CreateAndReadModelViewSet',
-    tuple(ADDITIONAL_MIXINS + [ChainingCreateUpdateModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
+    tuple(ADDITIONAL_MIXINS + [ChainingCreateUpdateMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
                                mixins.ListModelMixin, GenericViewSet]),
     {'__doc__': "A viewset that provides default `create()`, `list()` and `retrieve()` actions."}
 )
@@ -404,7 +404,7 @@ CreateAndReadModelViewSet = type(
 
 NonDeletableModelViewSet = type(
     'NonDeletableModelViewSet',
-    tuple(ADDITIONAL_MIXINS + [ChainingCreateUpdateModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
+    tuple(ADDITIONAL_MIXINS + [ChainingCreateUpdateMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
                                mixins.UpdateModelMixin, mixins.ListModelMixin, GenericViewSet]),
     {'__doc__': "A viewset that provides default `create()`, `retrieve()`, `update()`, "
                 "`partial_update()` and `list()` actions."}
@@ -413,7 +413,7 @@ NonDeletableModelViewSet = type(
 
 ImmutableModelViewSet = type(
     'NonDeletableModelViewSet',
-    tuple(ADDITIONAL_MIXINS + [ChainingCreateUpdateModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
+    tuple(ADDITIONAL_MIXINS + [ChainingCreateUpdateMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
                                mixins.UpdateModelMixin, mixins.ListModelMixin, GenericViewSet]),
     {'__doc__': "A viewset that provides default `create()`, `retrieve()`, `destroy()`, "
                 "and `list()` actions."}
