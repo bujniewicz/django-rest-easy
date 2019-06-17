@@ -238,7 +238,7 @@ class GenericAPIViewBase(ScopedViewMixin, generics.GenericAPIView):
             schema = getattr(self, 'schema', 'default')
         return serializer_register.get_name(model, schema)
 
-    def get_serializer_class(self, verb=None):
+    def get_serializer_class(self, verb=None):  # pylint: disable=arguments-differ
         """
         Gets serializer appropriate for this view.
 
@@ -387,15 +387,44 @@ class GenericViewSet(ViewSetMixin, GenericAPIView):  # pragma: no cover
     """
 
 
-ReadOnlyModelViewSet = type('ReadOnlyModelViewSet',
-                            tuple(ADDITIONAL_MIXINS +
-                                  [mixins.RetrieveModelMixin, mixins.ListModelMixin, GenericViewSet]),
-                            {'__doc__': "A viewset that provides default `list()` and `retrieve()` actions."})
+ReadOnlyModelViewSet = type(
+    'ReadOnlyModelViewSet',
+    tuple(ADDITIONAL_MIXINS + [mixins.RetrieveModelMixin, mixins.ListModelMixin, GenericViewSet]),
+    {'__doc__': "A viewset that provides default `list()` and `retrieve()` actions."}
+)
 
 
-ModelViewSet = type('ModelViewSet',
-                    tuple(ADDITIONAL_MIXINS +
-                          [ChainingCreateUpdateMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
-                           mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin, GenericViewSet]),
-                    {'__doc__': "A viewset that provides default `create()`, `retrieve()`, `update()`, "
-                                "`partial_update()`, `destroy()` and `list()` actions."})
+CreateAndReadModelViewSet = type(
+    'CreateAndReadModelViewSet',
+    tuple(ADDITIONAL_MIXINS + [ChainingCreateUpdateModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
+                               mixins.ListModelMixin, GenericViewSet]),
+    {'__doc__': "A viewset that provides default `create()`, `list()` and `retrieve()` actions."}
+)
+
+
+NonDeletableModelViewSet = type(
+    'NonDeletableModelViewSet',
+    tuple(ADDITIONAL_MIXINS + [ChainingCreateUpdateModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
+                               mixins.UpdateModelMixin, mixins.ListModelMixin, GenericViewSet]),
+    {'__doc__': "A viewset that provides default `create()`, `retrieve()`, `update()`, "
+                "`partial_update()` and `list()` actions."}
+)
+
+
+ImmutableModelViewSet = type(
+    'NonDeletableModelViewSet',
+    tuple(ADDITIONAL_MIXINS + [ChainingCreateUpdateModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
+                               mixins.UpdateModelMixin, mixins.ListModelMixin, GenericViewSet]),
+    {'__doc__': "A viewset that provides default `create()`, `retrieve()`, `destroy()`, "
+                "and `list()` actions."}
+)
+
+
+ModelViewSet = type(
+    'ModelViewSet',
+    tuple(ADDITIONAL_MIXINS + [ChainingCreateUpdateMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin,
+                               mixins.UpdateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin,
+                               GenericViewSet]),
+    {'__doc__': "A viewset that provides default `create()`, `retrieve()`, `update()`, "
+                "`partial_update()`, `destroy()` and `list()` actions."}
+)
